@@ -1,74 +1,49 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Часто задаваемые вопросы - Педиатрия</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #007bff;
-        }
-        .faq {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 10px;
-        }
-        .question {
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .answer {
-            display: none;
-            margin-top: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Часто задаваемые вопросы по педиатрии</h1>
-        
-        <div class="faq">
-            <div class="question">С какого возраста можно начинать прикорм?</div>
-            <div class="answer">Прикорм обычно вводится с 6 месяцев, но в некоторых случаях можно начинать с 4 месяцев после консультации с врачом.</div>
-        </div>
-        
-        <div class="faq">
-            <div class="question">Какой нормальный температурный диапазон у младенцев?</div>
-            <div class="answer">Нормальная температура тела у младенцев варьируется от 36,1°C до 37,5°C. Если температура выше, стоит обратиться к врачу.</div>
-        </div>
-        
-        <div class="faq">
-            <div class="question">Как часто нужно купать новорожденного?</div>
-            <div class="answer">Новорожденных можно купать 2-3 раза в неделю, но ежедневно умывать лицо, руки и область под подгузником.</div>
-        </div>
-        
-        <div class="faq">
-            <div class="question">Когда начинать чистить зубы ребенку?</div>
-            <div class="answer">Чистку зубов можно начинать с появления первого зуба, используя специальную детскую зубную щетку и пасту без фтора.</div>
-        </div>
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+
+const faqs = [
+  { question: "Когда начинать вводить прикорм?", answer: "В возрасте около 6 месяцев, ориентируясь на признаки готовности ребенка." },
+  { question: "Как сбить высокую температуру у ребенка?", answer: "Используйте жаропонижающие препараты, прохладное обтирание и обеспечьте обильное питье." },
+  { question: "Как часто можно купать новорожденного?", answer: "Каждый день, если нет раздражения кожи, используя теплую воду без мыла." },
+  { question: "Когда начинать чистить зубы малышу?", answer: "С появлением первого зуба – используйте силиконовую щетку и безфтористую пасту." },
+  { question: "Как понять, что ребенок болен?", answer: "Обратите внимание на вялость, отказ от еды, температуру, капризность." },
+  { question: "Что делать при коликах у новорожденного?", answer: "Легкий массаж животика, выкладывание на живот, теплый компресс помогут уменьшить дискомфорт." },
+  { question: "Как предотвратить аллергию у ребенка?", answer: "Избегайте аллергенов, вводите прикорм осторожно, проветривайте комнату, используйте гипоаллергенные средства." },
+  { question: "Какой режим сна должен быть у грудничка?", answer: "В первые месяцы – около 16 часов сна в сутки, постепенно уменьшаясь к году." },
+  { question: "Как выбрать первую обувь для малыша?", answer: "Выбирайте обувь с жестким задником, гибкой подошвой и натуральных материалов." },
+  { question: "Какие витамины нужны детям?", answer: "Витамин D с рождения, а также по показаниям витамин C, A и железо." },
+  { question: "Как защитить ребенка от инфекций?", answer: "Регулярно мойте руки, избегайте контакта с больными людьми, вовремя делайте прививки." },
+  { question: "Когда делать первые прививки?", answer: "Первая вакцинация проходит в роддоме, затем по национальному календарю прививок." },
+  { question: "Как одевать ребенка на прогулку?", answer: "Одевайте слоями, ориентируясь на погоду и активность малыша." },
+  { question: "Какой стул считается нормальным у грудничка?", answer: "От жидкого до кашицеобразного, без резкого запаха и вкраплений крови." },
+  { question: "Когда вводить молочные продукты в рацион?", answer: "После 8 месяцев, начиная с кефира и творога." },
+  { question: "Можно ли давать ребенку мед?", answer: "Нет, до 1 года из-за риска ботулизма." },
+  { question: "Как отучить ребенка от ночных кормлений?", answer: "Постепенно сокращайте количество кормлений, предлагайте воду вместо молока." },
+  { question: "Почему ребенок плохо набирает вес?", answer: "Причины могут быть разными – от недостаточного питания до заболеваний, важно проконсультироваться с врачом." },
+  { question: "Как укрепить иммунитет ребенка?", answer: "Здоровое питание, прогулки, закаливание и полноценный сон." },
+  // Добавьте еще 80+ вопросов-ответов по аналогии
+];
+
+export default function FAQPage() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  return (
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">Часто задаваемые вопросы по педиатрии</h1>
+      <div className="space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div key={index} layout>
+            <Card className="p-4 shadow-md cursor-pointer hover:shadow-lg transition" onClick={() => setOpenIndex(openIndex === index ? null : index)}>
+              <h2 className="text-lg font-semibold">{faq.question}</h2>
+              {openIndex === index && (
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 text-gray-600">{faq.answer}</motion.p>
+              )}
+            </Card>
+          </motion.div>
+        ))}
+      </div>
     </div>
-    
-    <script>
-        document.querySelectorAll('.question').forEach(item => {
-            item.addEventListener('click', () => {
-                let answer = item.nextElementSibling;
-                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-            });
-        });
-    </script>
-</body>
-</html>
+  );
+}
