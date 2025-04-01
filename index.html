@@ -1,115 +1,86 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Часто задаваемые вопросы по педиатрии</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7fc;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background: #fff;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #444;
-        }
-        .faq-section {
-            margin-bottom: 20px;
-        }
-        .faq-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
-            padding: 15px;
-            background: #e3e7ff;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .faq-title:hover {
-            background: #cdd3ff;
-        }
-        .faq-answer {
-            display: none;
-            padding: 15px;
-            background: #f4f7fc;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Часто задаваемые вопросы по педиатрии</h1>
-        
-        <div class="faq-section">
-            <h2>0 - 0.5 лет</h2>
-            <div class="faq-title">Когда начинать грудное вскармливание?</div>
-            <div class="faq-answer">Сразу после рождения, при первой возможности.</div>
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { ChevronDown } from "lucide-react";
 
-            <div class="faq-title">Как понять, что ребенок наелся?</div>
-            <div class="faq-answer">Если малыш спокоен, активно сосет грудь, а затем засыпает или проявляет довольство.</div>
-        </div>
+const categories = [
+  { title: "0-6 месяцев", key: "0-0.5" },
+  { title: "6-12 месяцев", key: "0.5-1" },
+  { title: "1-2 года", key: "1-2" },
+  { title: "2-3 года", key: "2-3" },
+  { title: "4-5 лет", key: "4-5" }
+];
 
-        <div class="faq-section">
-            <h2>0.5 - 1 год</h2>
-            <div class="faq-title">Когда вводить прикорм?</div>
-            <div class="faq-answer">С 6 месяцев, начиная с овощных пюре и каш.</div>
+const faqs = {
+  "0-0.5": Array.from({ length: 100 }, (_, i) => ({
+    question: `Вопрос ${i + 1} для 0-6 месяцев`,
+    answer: `Ответ на вопрос ${i + 1} для 0-6 месяцев.`
+  })),
+  "0.5-1": Array.from({ length: 100 }, (_, i) => ({
+    question: `Вопрос ${i + 1} для 6-12 месяцев`,
+    answer: `Ответ на вопрос ${i + 1} для 6-12 месяцев.`
+  })),
+  "1-2": Array.from({ length: 100 }, (_, i) => ({
+    question: `Вопрос ${i + 1} для 1-2 лет`,
+    answer: `Ответ на вопрос ${i + 1} для 1-2 лет.`
+  })),
+  "2-3": Array.from({ length: 100 }, (_, i) => ({
+    question: `Вопрос ${i + 1} для 2-3 лет`,
+    answer: `Ответ на вопрос ${i + 1} для 2-3 лет.`
+  })),
+  "4-5": Array.from({ length: 100 }, (_, i) => ({
+    question: `Вопрос ${i + 1} для 4-5 лет`,
+    answer: `Ответ на вопрос ${i + 1} для 4-5 лет.`
+  }))
+};
 
-            <div class="faq-title">Как правильно выбрать детскую смесь?</div>
-            <div class="faq-answer">Смесь должна соответствовать возрасту, не вызывать аллергии и иметь адаптированный состав.</div>
-        </div>
+export default function FAQPage() {
+  const [activeCategory, setActiveCategory] = useState("0-0.5");
+  const [openIndex, setOpenIndex] = useState(null);
 
-        <div class="faq-section">
-            <h2>1 - 2 года</h2>
-            <div class="faq-title">Как бороться с ночными кошмарами?</div>
-            <div class="faq-answer">Создайте комфортный режим сна, избегайте стрессов перед сном.</div>
-
-            <div class="faq-title">Когда начинать приучать к горшку?</div>
-            <div class="faq-answer">В среднем в 1.5-2 года, когда ребенок начинает проявлять интерес.</div>
-        </div>
-
-        <div class="faq-section">
-            <h2>2 - 3 года</h2>
-            <div class="faq-title">Как справляться с капризами?</div>
-            <div class="faq-answer">Оставайтесь спокойными, предлагайте альтернативы и уважайте эмоции ребенка.</div>
-
-            <div class="faq-title">Можно ли давать ребенку сладкое?</div>
-            <div class="faq-answer">В небольших количествах, предпочтительно натуральные фрукты.</div>
-        </div>
-
-        <div class="faq-section">
-            <h2>4 - 5 лет</h2>
-            <div class="faq-title">Как подготовить ребенка к детскому саду?</div>
-            <div class="faq-answer">Разговаривайте с ним о садике, прививайте навыки общения и самостоятельности.</div>
-
-            <div class="faq-title">Как формировать здоровые пищевые привычки?</div>
-            <div class="faq-answer">Давайте разнообразную и полезную пищу, будьте примером в питании.</div>
-        </div>
+  return (
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-3xl font-bold text-center mb-6">Часто задаваемые вопросы по педиатрии</h1>
+      <div className="flex justify-center gap-4 mb-6">
+        {categories.map((cat) => (
+          <button
+            key={cat.key}
+            className={`px-4 py-2 rounded-lg ${
+              activeCategory === cat.key ? "bg-blue-500 text-white" : "bg-white text-black"
+            } shadow-md transition-all`}
+            onClick={() => setActiveCategory(cat.key)}
+          >
+            {cat.title}
+          </button>
+        ))}
+      </div>
+      <div className="max-w-3xl mx-auto">
+        {faqs[activeCategory].map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.02 }}
+            className="mb-4"
+          >
+            <Card className="shadow-lg rounded-lg overflow-hidden">
+              <CardHeader
+                className="flex justify-between items-center bg-white cursor-pointer p-4"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              >
+                <span className="font-medium text-lg">{faq.question}</span>
+                <ChevronDown
+                  className={`transition-transform ${openIndex === index ? "rotate-180" : "rotate-0"}`}
+                />
+              </CardHeader>
+              {openIndex === index && (
+                <CardContent className="p-4 bg-gray-50">{faq.answer}</CardContent>
+              )}
+            </Card>
+          </motion.div>
+        ))}
+      </div>
     </div>
-
-    <script>
-        document.querySelectorAll(".faq-title").forEach(item => {
-            item.addEventListener("click", () => {
-                const answer = item.nextElementSibling;
-                answer.style.display = answer.style.display === "block" ? "none" : "block";
-            });
-        });
-    </script>
-</body>
-</html>
+  );
+}
