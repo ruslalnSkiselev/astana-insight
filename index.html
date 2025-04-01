@@ -31,17 +31,28 @@ export default function FAQPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Часто задаваемые вопросы по педиатрии</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Часто задаваемые вопросы по педиатрии</h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <motion.div key={index} layout>
-            <Card className="p-4 shadow-md cursor-pointer hover:shadow-lg transition" onClick={() => setOpenIndex(openIndex === index ? null : index)}>
-              <h2 className="text-lg font-semibold">{faq.question}</h2>
-              {openIndex === index && (
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 text-gray-600">{faq.answer}</motion.p>
-              )}
-            </Card>
-          </motion.div>
+          <Card key={index} className="p-4 rounded-2xl shadow-md bg-white">
+            <Button
+              className="w-full text-left text-lg font-medium flex justify-between items-center"
+              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            >
+              {faq.question}
+              <motion.span animate={{ rotate: openIndex === index ? 180 : 0 }}>&#9660;</motion.span>
+            </Button>
+            {openIndex === index && (
+              <motion.p
+                className="mt-3 text-gray-600"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                {faq.answer}
+              </motion.p>
+            )}
+          </Card>
         ))}
       </div>
     </div>
