@@ -3,108 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Педиатрический FAQ</title>
+    <title>Часто задаваемые вопросы по педиатрии</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f9f9f9;
+            color: #333;
             margin: 0;
-            padding: 0;
-            text-align: center;
+            padding: 20px;
         }
         .container {
-            width: 90%;
             max-width: 800px;
-            margin: 20px auto;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
         }
         .category {
-            background-color: #007bff;
+            margin-top: 20px;
+        }
+        .question {
+            background: #007BFF;
             color: white;
             padding: 10px;
-            margin: 10px 0;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .category:hover {
-            background-color: #0056b3;
-        }
-        .faq-item {
-            background: white;
             margin: 5px 0;
-            padding: 10px;
             border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
         }
-        .faq-answer {
+        .answer {
             display: none;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #333;
+            padding: 10px;
+            background: #f1f1f1;
+            border-left: 3px solid #007BFF;
+            margin-bottom: 5px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Часто задаваемые вопросы по педиатрии</h1>
-        <div id="categories"></div>
-        <div id="faq-list"></div>
+        <div id="faq"></div>
     </div>
-    
     <script>
         const faqData = {
             "0-0.5 лет": [
-                { question: "Когда начинать прикорм?", answer: "С 6 месяцев..." },
-                { question: "Как часто кормить грудничка?", answer: "Каждые 2-3 часа..." }
-                // Добавь 98 вопросов сюда
+                { question: "Как часто кормить новорожденного?", answer: "Каждые 2-3 часа по требованию ребенка." },
+                { question: "Какая температура воды для купания?", answer: "37°C - оптимальная температура воды для купания младенца." },
+                { question: "Когда начинать выкладывать ребенка на живот?", answer: "С первых дней жизни, начиная с 1-2 минут." },
+                { question: "Как понять, что ребенок наелся?", answer: "Ребенок сам отпускает грудь или бутылочку, выглядит довольным." },
+                { question: "Нужно ли будить ребенка для кормления?", answer: "Только если у него есть медицинские показания, в остальном – кормить по требованию." },
+                { question: "Можно ли давать воду новорожденному?", answer: "При грудном вскармливании в воде нет необходимости, на искусственном – по необходимости." }
             ],
-            "0.5-1 лет": [
-                { question: "Как отучить от ночных кормлений?", answer: "Постепенно..." },
-                { question: "Как выбрать обувь?", answer: "Должна быть мягкая..." }
-                // Добавь 98 вопросов сюда
+            "0.5-1 год": [
+                { question: "Когда вводить прикорм?", answer: "С 6 месяцев, начиная с овощных пюре и каш." },
+                { question: "Можно ли давать коровье молоко?", answer: "Нет, до 1 года коровье молоко не рекомендуется." }
             ],
             "1-2 года": [
-                { question: "Когда начинать учить говорить?", answer: "С первых месяцев..." },
-                { question: "Можно ли давать шоколад?", answer: "Лучше избегать..." }
-                // Добавь 98 вопросов сюда
+                { question: "Как приучить ребенка к горшку?", answer: "Начинать с 18 месяцев, показывать пример, использовать позитивное подкрепление." },
+                { question: "Когда ребенок должен начать говорить?", answer: "Первые слова – около 1 года, предложения – ближе к 2 годам." }
             ],
             "2-3 года": [
-                { question: "Как приучить к горшку?", answer: "Постепенно..." },
-                { question: "Можно ли давать орехи?", answer: "После 3 лет..." }
-                // Добавь 98 вопросов сюда
+                { question: "Как справляться с истериками?", answer: "Оставаться спокойным, предлагать альтернативы, не поддаваться на манипуляции." },
+                { question: "Нужно ли водить ребенка к стоматологу?", answer: "Да, первый осмотр – около 1 года." }
             ],
             "4-5 лет": [
-                { question: "Как подготовить к школе?", answer: "Игровыми методами..." },
-                { question: "Нужно ли посещать логопеда?", answer: "Если есть проблемы..." }
-                // Добавь 98 вопросов сюда
+                { question: "Как подготовить ребенка к школе?", answer: "Развивать речь, мелкую моторику, навыки общения и усидчивость." },
+                { question: "Сколько времени ребенок должен проводить на улице?", answer: "Минимум 2-3 часа в день в зависимости от погоды." }
             ]
         };
-
-        const categoriesContainer = document.getElementById("categories");
-        const faqListContainer = document.getElementById("faq-list");
-
-        function showFAQs(category) {
-            faqListContainer.innerHTML = "";
+        
+        const faqContainer = document.getElementById("faq");
+        
+        for (const category in faqData) {
+            let categoryDiv = document.createElement("div");
+            categoryDiv.classList.add("category");
+            
+            let categoryTitle = document.createElement("h2");
+            categoryTitle.textContent = category;
+            categoryDiv.appendChild(categoryTitle);
+            
             faqData[category].forEach(faq => {
-                let faqItem = document.createElement("div");
-                faqItem.classList.add("faq-item");
-                faqItem.innerHTML = `<strong>${faq.question}</strong><div class='faq-answer'>${faq.answer}</div>`;
-                faqItem.addEventListener("click", () => {
-                    const answer = faqItem.querySelector(".faq-answer");
-                    answer.style.display = answer.style.display === "block" ? "none" : "block";
+                let questionDiv = document.createElement("div");
+                questionDiv.classList.add("question");
+                questionDiv.textContent = faq.question;
+                
+                let answerDiv = document.createElement("div");
+                answerDiv.classList.add("answer");
+                answerDiv.textContent = faq.answer;
+                
+                questionDiv.addEventListener("click", () => {
+                    answerDiv.style.display = answerDiv.style.display === "block" ? "none" : "block";
                 });
-                faqListContainer.appendChild(faqItem);
+                
+                categoryDiv.appendChild(questionDiv);
+                categoryDiv.appendChild(answerDiv);
             });
+            
+            faqContainer.appendChild(categoryDiv);
         }
-
-        Object.keys(faqData).forEach(category => {
-            let categoryButton = document.createElement("div");
-            categoryButton.classList.add("category");
-            categoryButton.textContent = category;
-            categoryButton.addEventListener("click", () => showFAQs(category));
-            categoriesContainer.appendChild(categoryButton);
-        });
     </script>
 </body>
 </html>
