@@ -1,46 +1,115 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Часто задаваемые вопросы по педиатрии</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        .faq-section {
+            margin-bottom: 20px;
+        }
+        .faq-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            padding: 15px;
+            background: #e3e7ff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .faq-title:hover {
+            background: #cdd3ff;
+        }
+        .faq-answer {
+            display: none;
+            padding: 15px;
+            background: #f4f7fc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Часто задаваемые вопросы по педиатрии</h1>
+        
+        <div class="faq-section">
+            <h2>0 - 0.5 лет</h2>
+            <div class="faq-title">Когда начинать грудное вскармливание?</div>
+            <div class="faq-answer">Сразу после рождения, при первой возможности.</div>
 
-const faqs = [
-  { question: "Когда начинать вводить прикорм?", answer: "В возрасте около 6 месяцев, ориентируясь на признаки готовности ребенка." },
-  { question: "Как сбить высокую температуру у ребенка?", answer: "Используйте жаропонижающие препараты, прохладное обтирание и обеспечьте обильное питье." },
-  { question: "Как часто можно купать новорожденного?", answer: "Каждый день, если нет раздражения кожи, используя теплую воду без мыла." },
-  { question: "Когда начинать чистить зубы малышу?", answer: "С появлением первого зуба – используйте силиконовую щетку и безфтористую пасту." },
-  { question: "Как понять, что ребенок болен?", answer: "Обратите внимание на вялость, отказ от еды, температуру, капризность." },
-];
+            <div class="faq-title">Как понять, что ребенок наелся?</div>
+            <div class="faq-answer">Если малыш спокоен, активно сосет грудь, а затем засыпает или проявляет довольство.</div>
+        </div>
 
-export default function FAQPage() {
-  const [openIndex, setOpenIndex] = useState(null);
+        <div class="faq-section">
+            <h2>0.5 - 1 год</h2>
+            <div class="faq-title">Когда вводить прикорм?</div>
+            <div class="faq-answer">С 6 месяцев, начиная с овощных пюре и каш.</div>
 
-  return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold text-center mb-6">Часто задаваемые вопросы по педиатрии</h1>
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="border rounded-2xl shadow-lg overflow-hidden">
-            <button
-              className="w-full flex justify-between items-center p-4 bg-blue-100 hover:bg-blue-200 transition-colors"
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            >
-              <span className="text-lg font-semibold">{faq.question}</span>
-              <motion.div animate={{ rotate: openIndex === index ? 180 : 0 }}>
-                <ChevronDown size={24} />
-              </motion.div>
-            </button>
-            {openIndex === index && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                className="p-4 bg-white"
-              >
-                {faq.answer}
-              </motion.div>
-            )}
-          </div>
-        ))}
-      </div>
+            <div class="faq-title">Как правильно выбрать детскую смесь?</div>
+            <div class="faq-answer">Смесь должна соответствовать возрасту, не вызывать аллергии и иметь адаптированный состав.</div>
+        </div>
+
+        <div class="faq-section">
+            <h2>1 - 2 года</h2>
+            <div class="faq-title">Как бороться с ночными кошмарами?</div>
+            <div class="faq-answer">Создайте комфортный режим сна, избегайте стрессов перед сном.</div>
+
+            <div class="faq-title">Когда начинать приучать к горшку?</div>
+            <div class="faq-answer">В среднем в 1.5-2 года, когда ребенок начинает проявлять интерес.</div>
+        </div>
+
+        <div class="faq-section">
+            <h2>2 - 3 года</h2>
+            <div class="faq-title">Как справляться с капризами?</div>
+            <div class="faq-answer">Оставайтесь спокойными, предлагайте альтернативы и уважайте эмоции ребенка.</div>
+
+            <div class="faq-title">Можно ли давать ребенку сладкое?</div>
+            <div class="faq-answer">В небольших количествах, предпочтительно натуральные фрукты.</div>
+        </div>
+
+        <div class="faq-section">
+            <h2>4 - 5 лет</h2>
+            <div class="faq-title">Как подготовить ребенка к детскому саду?</div>
+            <div class="faq-answer">Разговаривайте с ним о садике, прививайте навыки общения и самостоятельности.</div>
+
+            <div class="faq-title">Как формировать здоровые пищевые привычки?</div>
+            <div class="faq-answer">Давайте разнообразную и полезную пищу, будьте примером в питании.</div>
+        </div>
     </div>
-  );
-}
+
+    <script>
+        document.querySelectorAll(".faq-title").forEach(item => {
+            item.addEventListener("click", () => {
+                const answer = item.nextElementSibling;
+                answer.style.display = answer.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+</body>
+</html>
