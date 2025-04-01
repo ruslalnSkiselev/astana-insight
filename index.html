@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   { question: "Когда начинать вводить прикорм?", answer: "В возрасте около 6 месяцев, ориентируясь на признаки готовности ребенка." },
@@ -13,48 +14,26 @@ const faqs = [
   { question: "Как предотвратить аллергию у ребенка?", answer: "Избегайте аллергенов, вводите прикорм осторожно, проветривайте комнату, используйте гипоаллергенные средства." },
   { question: "Какой режим сна должен быть у грудничка?", answer: "В первые месяцы – около 16 часов сна в сутки, постепенно уменьшаясь к году." },
   { question: "Как выбрать первую обувь для малыша?", answer: "Выбирайте обувь с жестким задником, гибкой подошвой и натуральных материалов." },
-  { question: "Какие витамины нужны детям?", answer: "Витамин D с рождения, а также по показаниям витамин C, A и железо." },
-  { question: "Как защитить ребенка от инфекций?", answer: "Регулярно мойте руки, избегайте контакта с больными людьми, вовремя делайте прививки." },
-  { question: "Когда делать первые прививки?", answer: "Первая вакцинация проходит в роддоме, затем по национальному календарю прививок." },
-  { question: "Как одевать ребенка на прогулку?", answer: "Одевайте слоями, ориентируясь на погоду и активность малыша." },
-  { question: "Какой стул считается нормальным у грудничка?", answer: "От жидкого до кашицеобразного, без резкого запаха и вкраплений крови." },
-  { question: "Когда вводить молочные продукты в рацион?", answer: "После 8 месяцев, начиная с кефира и творога." },
-  { question: "Можно ли давать ребенку мед?", answer: "Нет, до 1 года из-за риска ботулизма." },
-  { question: "Как отучить ребенка от ночных кормлений?", answer: "Постепенно сокращайте количество кормлений, предлагайте воду вместо молока." },
-  { question: "Почему ребенок плохо набирает вес?", answer: "Причины могут быть разными – от недостаточного питания до заболеваний, важно проконсультироваться с врачом." },
-  { question: "Как укрепить иммунитет ребенка?", answer: "Здоровое питание, прогулки, закаливание и полноценный сон." },
-  // Добавьте еще 80+ вопросов-ответов по аналогии
+  { question: "Какие витамины нужны детям?", answer: "Витамин D с рождения, а также по показаниям витамин C, A и железо." }
 ];
 
 export default function FAQPage() {
-  const [openIndex, setOpenIndex] = useState(null);
-
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Часто задаваемые вопросы по педиатрии</h1>
-      <div className="space-y-4">
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">Часто задаваемые вопросы по педиатрии</h1>
+      <Accordion type="single" collapsible>
         {faqs.map((faq, index) => (
-          <Card key={index} className="p-4 rounded-2xl shadow-md bg-white">
-            <Button
-              className="w-full text-left text-lg font-medium flex justify-between items-center"
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            >
-              {faq.question}
-              <motion.span animate={{ rotate: openIndex === index ? 180 : 0 }}>&#9660;</motion.span>
-            </Button>
-            {openIndex === index && (
-              <motion.p
-                className="mt-3 text-gray-600"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-              >
-                {faq.answer}
-              </motion.p>
-            )}
-          </Card>
+          <AccordionItem key={index} value={index.toString()}>
+            <Card className="mb-4 shadow-lg rounded-2xl overflow-hidden">
+              <CardHeader className="p-4 bg-gray-100 cursor-pointer flex justify-between items-center">
+                <span className="font-semibold text-lg">{faq.question}</span>
+                <ChevronDown className="w-5 h-5 transition-transform duration-300" />
+              </CardHeader>
+              <CardContent className="p-4 bg-white border-t border-gray-200">{faq.answer}</CardContent>
+            </Card>
+          </AccordionItem>
         ))}
-      </div>
+      </Accordion>
     </div>
   );
 }
